@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+
+<style>
+body {
+  margin:0;
+  background:#111;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  height:100vh;
+  font-family:'Poppins', sans-serif;
+  overflow:hidden;
+}
+
+/* TELEFOON FULLSCREEN */
+.app {
+  width:100%;
+  max-width:400px;
+  height:100vh;
+  background:#1a1a1a;
+  padding:20px;
+  box-sizing:border-box;
+  display:flex;
+  flex-direction:column;
+  justify-content:flex-start;
+}
+
+/* titel */
+.header {
+  text-align:center;
+  color:#fff;
+  font-size:5vw;
+  font-weight:600;
+  margin-bottom:10vh;
+}
+
+/* meter wrapper */
+.meter {
+  width:100%;
+  aspect-ratio:2/1;
+  border-top-left-radius:1000px;
+  border-top-right-radius:1000px;
+  background:linear-gradient(to right,
+    #00ff66,
+    #99ff00,
+    #ffff00,
+    #ff9900,
+    #ff0000);
+  position:relative;
+  box-shadow:0 0 30px rgba(255,255,255,0.1);
+}
+
+/* binnenkant */
+.meter::after {
+  content:"";
+  position:absolute;
+  top:15%;
+  left:5%;
+  right:5%;
+  bottom:0;
+  background:#1a1a1a;
+  border-top-left-radius:1000px;
+  border-top-right-radius:1000px;
+}
+
+/* wijzer */
+.needle {
+  position:absolute;
+  bottom:0;
+  left:50%;
+  width:2%;
+  height:75%;
+  background:white;
+
+  transform-origin:bottom center;
+  transform:translateX(-50%) rotate(90deg);
+
+  transition:transform 1s ease-in-out;
+  box-shadow:0 0 10px white;
+  z-index:10;
+}
+
+/* center */
+.center {
+  position:absolute;
+  bottom:-5%;
+  left:50%;
+  width:6%;
+  height:6%;
+  background:white;
+  border-radius:50%;
+  transform:translateX(-50%);
+  z-index:11;
+}
+</style>
+</head>
+
+<body>
+
+<div class="app">
+
+  <div class="header">ENERGIENIVEAU</div>
+
+  <div class="meter">
+    <div class="needle" id="needle"></div>
+    <div class="center"></div>
+  </div>
+
+</div>
+
+<script>
+let isLeft = false;
+const needle = document.getElementById("needle");
+
+document.body.addEventListener("click", () => {
+  if (isLeft) {
+    needle.style.transform = "translateX(-50%) rotate(90deg)";
+  } else {
+    needle.style.transform = "translateX(-50%) rotate(-90deg)";
+  }
+  isLeft = !isLeft;
+});
+</script>
+
+</body>
+</html>
